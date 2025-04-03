@@ -1,13 +1,19 @@
-import { Modal, View, Text, Pressable, StyleSheet } from 'react-native';
+import { Modal, View, Text, Pressable, StyleSheet, ScrollView, Image } from 'react-native';
 import { PropsWithChildren } from 'react';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+
+const treeCatalog = [ 
+  
+  {id : 1, name: 'Perfect tree', source: require('../assets/perfecttree.png')}
+];
 
 type Props = PropsWithChildren<{
   isVisible: boolean;
   onClose: () => void;
+  onSelect: (image: any) => void;
 }>;
 
-export default function EmojiPicker({ isVisible, children, onClose }: Props) {
+export default function TreePicker({ isVisible, onClose, onSelect }: Props) {
   return (
     <View>
     <Modal animationType="slide" transparent={true} visible={isVisible}>
@@ -18,7 +24,13 @@ export default function EmojiPicker({ isVisible, children, onClose }: Props) {
             <MaterialIcons name="close" color="#fff" size={22} />
           </Pressable>
         </View>
-        {children}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
+  {treeCatalog.map((tree) => (
+    <Pressable key={tree.id} onPress={() => { onSelect(tree.source); onClose(); }}>
+      <Image source={tree.source} style={styles.treeImage} />
+    </Pressable>
+  ))}
+</ScrollView>
       </View>
     </Modal>
     </View>
@@ -48,5 +60,17 @@ const styles = StyleSheet.create({
   title: {
     color: '#fff',
     fontSize: 16,
+  },
+  treeImage: {
+    width: 80,
+    height: 80,
+    marginRight: 10,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#ccc',
+  },
+  scrollView: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
 });

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 import Button from 'C:/Users/caroc/urban_nature_app/components/Button';
 import ImageViewer from 'C:/Users/caroc/urban_nature_app/components/ImageViewer';
@@ -13,6 +14,7 @@ import TreePicker from 'C:/Users/caroc/urban_nature_app/components/TreePicker';
 import PlaceholderImage from 'C:/Users/caroc/urban_nature_app/assets/background-image.avif';
 
 export default function Index() {
+  const navigation = useNavigation();
   const [selectedImage, setSelectedImage] = useState(undefined);
   const [showAppOptions, setShowAppOptions] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
