@@ -7,6 +7,7 @@ import Button from 'C:/Users/caroc/urban_nature_app/components/Button';
 import ImageViewer from 'C:/Users/caroc/urban_nature_app/components/ImageViewer';
 import IconButton from 'C:/Users/caroc/urban_nature_app/components/IconButton';
 import CircleButton from 'C:/Users/caroc/urban_nature_app/components/CircleButton';
+import TreePicker from 'C:/Users/caroc/urban_nature_app/components/TreePicker';
 
 
 import PlaceholderImage from 'C:/Users/caroc/urban_nature_app/assets/background-image.avif';
@@ -14,6 +15,7 @@ import PlaceholderImage from 'C:/Users/caroc/urban_nature_app/assets/background-
 export default function Index() {
   const [selectedImage, setSelectedImage] = useState(undefined);
   const [showAppOptions, setShowAppOptions] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -35,11 +37,16 @@ export default function Index() {
   };
 
   const onAddSticker = () => {
-    // we will implement this later
+    setIsModalVisible(true);
+  };
+
+  const onModalClose = () => {
+    setIsModalVisible(false);
   };
 
   const onSaveImageAsync = async () => {
-    // we will implement this later
+    alert("It will come soon!")
+
   };
 
   return (
@@ -61,6 +68,9 @@ export default function Index() {
           <Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
         </View>
       )}
+      <TreePicker isVisible={isModalVisible} onClose={onModalClose}>
+        {/* A list of emoji component will go here */}
+      </TreePicker>
     </View>
   );
 }
