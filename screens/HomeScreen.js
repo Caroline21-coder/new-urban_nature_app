@@ -1,41 +1,89 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { useState } from 'react';
 
-const HomeScreen = () => {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Welcome !</Text>
-            <Image
-                style={styles.image}
-                source={require('../assets/parc.png')}
-            />
-            <Text style={styles.text}>This is where you start your urban nature journey.</Text>
+import Button from 'C:/Users/caroc/urban_nature_app/components/Button';
+import ImageViewer from 'C:/Users/caroc/urban_nature_app/components/ImageViewer';
+import IconButton from 'C:/Users/caroc/urban_nature_app/components/IconButton';
+import CircleButton from 'C:/Users/caroc/urban_nature_app/components/CircleButton';
+
+
+import PlaceholderImage from 'C:/Users/caroc/urban_nature_app/assets/background-image.avif';
+
+export default function Index() {
+  const [selectedImage, setSelectedImage] = useState(undefined);
+  const [showAppOptions, setShowAppOptions] = useState(false);
+
+  const pickImageAsync = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+      setShowAppOptions(true);
+    } else {
+      alert('You did not select any image.');
+    }
+  };
+
+  const onReset = () => {
+    setShowAppOptions(false);
+  };
+
+  const onAddSticker = () => {
+    // we will implement this later
+  };
+
+  const onSaveImageAsync = async () => {
+    // we will implement this later
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.imageContainer}>
+      <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} /> 
+      </View>
+      {showAppOptions ? (
+        <View style={styles.optionsContainer}>
+        <View style={styles.optionsRow}>
+          <IconButton icon="refresh" label="Reset" onPress={onReset} />
+          <CircleButton onPress={onAddSticker} />
+          <IconButton icon="save-alt" label="Save" onPress={onSaveImageAsync} />
         </View>
-    );
+      </View>
+      ) : (
+        <View style={styles.footerContainer}>
+          <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
+          <Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
+        </View>
+      )}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    title: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    image: {
-        width: 200,
-        height: 200,
-        margin: 15,
-    },
-    text: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#F5FCFF',
+    alignItems: 'center',
+  },
+  imageContainer: {
+    flex: 1,
+  },
+  footerContainer: {
+    flex: 1 / 3,
+    alignItems: 'center',
+  },
+  optionsContainer: {
+    position: 'absolute',
+    bottom: 80,
+  },
+  optionsRow: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
 });
-
-export default HomeScreen;
