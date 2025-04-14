@@ -4,14 +4,14 @@ import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import {useNavigation} from '@react-navigation/native';
 
-import Button from 'C:/Users/caroc/urban_nature_app/components/Button';
-import ImageViewer from 'C:/Users/caroc/urban_nature_app/components/ImageViewer';
-import IconButton from 'C:/Users/caroc/urban_nature_app/components/IconButton';
-import CircleButton from 'C:/Users/caroc/urban_nature_app/components/CircleButton';
-import TreePicker from 'C:/Users/caroc/urban_nature_app/components/TreePicker';
+import Button from '../components/Button';
+import ImageViewer from '../components/ImageViewer';
+import IconButton from '../components/IconButton';
+import CircleButton from '../components/CircleButton';
+import TreePicker from '../components/TreePicker';
 
 
-import PlaceholderImage from 'C:/Users/caroc/urban_nature_app/assets/background-image.avif';
+import PlaceholderImage from '../assets/background-image.avif';
 
 export default function Index() {
   const navigation = useNavigation();
