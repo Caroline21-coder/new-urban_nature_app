@@ -4,20 +4,40 @@ import ProfilePicker from '../ProfilePicker.js'
 
 const ProfileScreen = () => {
 
+
+    const [userType, setUserType] = useState('default');
     const [showPicker, setShowPicker] = useState(false);
     const handlePress = () => {
         setShowPicker(true);
     }
+    const handleUserChange = (type) => {
+        setUserType(type);
+    }
+
+    let imageSource;
+    switch (userType) {
+        case 'family':
+            imageSource = require('../assets/family.jpg');
+            break;
+        case 'citizen':
+            imageSource = require('../assets/citizen.jpg');
+            break;
+        case 'senior': 
+            imageSource = require('../assets/senior.png');
+            break;
+        case 'nature enthusiast':
+            imageSource = require('../assets/explorer.png');
+            break;
+        default:
+            imageSource = require('../assets/citizen.jpg')
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.title} onPress={handlePress}>My profile</Text>
-            <Image
-                style={styles.image}
-                source={require('../assets/profil.jpg')}
-            />
+            <Image style={styles.image} source={imageSource}/>
             <Text style={styles.text}>This is my profile.</Text>
 
-            {showPicker && <ProfilePicker /> }
+            {showPicker && (<ProfilePicker onUserChange={handleUserChange} />) }
         </View>
     );
 }

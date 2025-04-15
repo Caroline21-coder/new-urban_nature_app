@@ -9,10 +9,10 @@ type Props = {
 export default function ImageViewer({ imgSource, selectedImage }: Props) {
   return (
     <View style={styles.container}>
-      {/* Image de fond */}
+      {/* Background image */}
       <Image source={imgSource} style={styles.backgroundImage} />
 
-      {/* Arbre superposé (si sélectionné) */}
+      {/* Tree superposed (if selected) */}
       {selectedImage && (
         <Image source={selectedImage} style={styles.treeOverlay} />
       )}
