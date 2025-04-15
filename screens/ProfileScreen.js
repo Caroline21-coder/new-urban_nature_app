@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import ProfilePicker from '../ProfilePicker.js'
 
 const ProfileScreen = () => {
+
+    const [showPicker, setShowPicker] = useState(false);
+    const handlePress = () => {
+        setShowPicker(true);
+    }
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>My profile</Text>
+            <Text style={styles.title} onPress={handlePress}>My profile</Text>
             <Image
                 style={styles.image}
                 source={require('../assets/profil.jpg')}
             />
             <Text style={styles.text}>This is my profile.</Text>
+
+            {showPicker && <ProfilePicker /> }
         </View>
     );
 }
